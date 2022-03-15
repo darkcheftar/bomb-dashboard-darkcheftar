@@ -2,6 +2,12 @@ import React from 'react';
 import Stats from './Stats';
 import styled from 'styled-components';
 
+import useStatsForPool from '../../../hooks/useStatsForPool';
+import useBank from '../../../hooks/useBank';
+import useStakedBalance from '../../../hooks/useStakedBalance'
+import useEarnings from '../../../hooks/useEarnings'
+
+import {getDisplayBalance} from '../../../utils/formatBalance';
 const Styleddiv = styled.div`
 margin:10px;
 height:max-content;
@@ -10,15 +16,23 @@ color: white;
 `
 
 const BombFarms: React.FC<any> = () => {
+  const bombBtcb = useBank('BombBtcbLPBShareRewardPool');
+  const bombBtcbstatsOnPool = useStatsForPool(bombBtcb);
+  const bombBtcbstakedBalance = useStakedBalance(bombBtcb.contract, bombBtcb.poolId);
+  const bombBtcbearnings = useEarnings(bombBtcb.contract, bombBtcb.earnTokenName, bombBtcb.poolId);
+  
+  const bshareBnb = useBank('BshareBnbLPBShareRewardPool');
+  const bshareBnbstatsOnPool = useStatsForPool(bshareBnb);
+  const bshareBnbstakedBalance = useStakedBalance(bshareBnb.contract, bshareBnb.poolId);
+  const bshareBnbearnings = useEarnings(bshareBnb.contract, bshareBnb.earnTokenName, bshareBnb.poolId);  
   const bombbtcb = {
     heading:'BOMB-BTCB',
     bg:false,
     icon:'',
-    tvl:0,
-    totalstaked:0,
-    yourstake:0,
-    returns:0,
-    earned:0,
+    tvl:bombBtcbstatsOnPool?.TVL,
+    yourstake:getDisplayBalance(bombBtcbstakedBalance, bombBtcb.depositToken.decimal),
+    returns:bombBtcbstatsOnPool?.dailyAPR,
+    earned:getDisplayBalance(bombBtcbearnings),
     deposit:() => {},
     withdraw:() => {},
     claimrewards:() => {},
@@ -27,11 +41,10 @@ const BombFarms: React.FC<any> = () => {
     heading:'BSHARE-BNB',
     bg:false,
     icon:'',
-    tvl:0,
-    totalstaked:0,
-    yourstake:0,
-    returns:0,
-    earned:0,
+    tvl:bshareBnbstatsOnPool?.TVL,
+    yourstake:getDisplayBalance(bshareBnbstakedBalance, bshareBnb.depositToken.decimal),
+    returns:bshareBnbstatsOnPool?.dailyAPR,
+    earned:getDisplayBalance(bshareBnbearnings),
     deposit:() => {},
     withdraw:() => {},
     claimrewards:() => {},
