@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
+const StyledStats = styled.div`
+margin:10px;
+height:max-content;
+background: rgba(32, 37, 67, 0.5);
+color: white;
+`
 const Stats: React.FC<any> = ({heading, icon, tvl, totalstaked, yourstake, returns, earned, deposit, withdraw, claimrewards}) => {
-  const StyledStats = styled.div`
-    margin:10px;
-    height:max-content;
-    background: rgba(32, 37, 67, 0.5);
-    color: white;
-  `
+
   return (
       <StyledStats>
         <div className="heading">
-    <h2>Boardroom</h2>
+    <h2>{heading}</h2>
     <p>Stack BSHARE and earn BOMB every epoch</p>
 
 

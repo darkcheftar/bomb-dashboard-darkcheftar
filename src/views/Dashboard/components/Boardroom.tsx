@@ -3,7 +3,7 @@ import Stats from './Stats';
 
 
 const Boardroom: React.FC<any> = () => {
-  const heading = "";
+  const heading = "Boardroom";
   const icon = "";
   const totalstaked = 0;
   const yourstake = 0;

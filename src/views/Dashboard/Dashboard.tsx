@@ -13,11 +13,8 @@ import Bonds from './components/Bonds';
 import Links from './components/Links';
 import { Grid } from '@material-ui/core';
 import { useWallet } from 'use-wallet';
-// import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import useBombFinance from '../../hooks/useBombFinance';
 import useBombStats from '../../hooks/useBombStats';
-// import useLpStats from '../../hooks/useLpStats';
-// import useLpStatsBTC from '../../hooks/useLpStatsBTC';
 import useBondStats from '../../hooks/useBondStats';
 import usebShareStats from '../../hooks/usebShareStats';
 const BackgroundImage = createGlobalStyle`
@@ -30,18 +27,11 @@ const BackgroundImage = createGlobalStyle`
 
 const TITLE = 'bomb.money | Dashboard';
 const Dashboard: React.FC = () => {
-  // const TVL = useTotalValueLocked();
-  // const bombFtmLpStats = useLpStatsBTC('BOMB-BTCB-LP');
-  // const bShareFtmLpStats = useLpStats('BSHARE-BNB-LP');
   const bombStats = useBombStats();
   const bShareStats = usebShareStats();
   const tBondStats = useBondStats();
   const bombFinance = useBombFinance();
-
   const { account } = useWallet();
-
-  // const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
-  // const bshareLPStats = useMemo(() => (bShareFtmLpStats ? bShareFtmLpStats : null), [bShareFtmLpStats]);
   const bombPriceInDollars = useMemo(
     () => (bombStats ? Number(bombStats.priceInDollars).toFixed(2) : null),
     [bombStats],

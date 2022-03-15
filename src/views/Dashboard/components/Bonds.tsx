@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const Styleddiv = styled.div`
+height:max-content;
+background: rgba(32, 37, 67, 0.5);
+color: white;
+`
 
 const Bonds: React.FC<any> = () => {
-  const Styleddiv = styled.div`
-    height:max-content;
-    background: rgba(32, 37, 67, 0.5);
-    color: white;
-  `
+
   return (
    <Styleddiv>
      <h1>Bonds</h1>

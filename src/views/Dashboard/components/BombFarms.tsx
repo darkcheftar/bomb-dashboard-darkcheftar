@@ -18,8 +18,8 @@ const BombFarms: React.FC<any> = () => {
  // dummy ends
   return (
     <>
-   <Stats {...values}/>
-   <Stats {...values}/>
+   <Stats {...values} heading='BOMB-BTCB '/>
+   <Stats {...values} heading='BSHARE-BNB'/>
    </>
   );
 };

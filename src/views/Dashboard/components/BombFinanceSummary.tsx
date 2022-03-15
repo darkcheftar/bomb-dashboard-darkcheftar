@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useMemo} from 'react';
 import styled from 'styled-components';
 import MetamaskFox from '../../../assets/img/metamask-fox.svg';
 import BombImage from '../../../assets/img/bomb.png';
@@ -8,11 +8,14 @@ import ProgressCountdown from '../../Boardroom/components/ProgressCountdown';
 import moment from 'moment';
 import useCurrentEpoch from '../../../hooks/useCurrentEpoch';
 import useTreasuryAllocationTimes from '../../../hooks/useTreasuryAllocationTimes';
+import useCashPriceInEstimatedTWAP from '../../../hooks/useCashPriceInEstimatedTWAP';
+import useTotalValueLocked from '../../../hooks/useTotalValueLocked';
+import useCashPriceInLastTWAP from '../../../hooks/useCashPriceInLastTWAP';
 import { PieChart } from 'react-minimal-pie-chart';
 import { roundAndFormatNumber } from '../../../0x';
 
 const StyledDiv = styled.div`
-  height:max-content;
+  height: max-content;
   background: rgba(32, 37, 67, 0.5);
   color: white;
   & > h1 {
@@ -41,9 +44,9 @@ const StyledDiv = styled.div`
   & svg {
     height: 100px;
   }
-  & .row{
+  & .row {
     display: grid;
-    grid-template-columns:repeat(2, 1fr) ;
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 
@@ -54,7 +57,12 @@ const Styledspan = styled.span`
 const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
   const currentEpoch = useCurrentEpoch();
   const { to } = useTreasuryAllocationTimes();
-  const {bomb, bshare, bbond} = details;
+  const { bomb, bshare, bbond } = details;
+  const cashStat = useCashPriceInEstimatedTWAP();
+  const livetwap = useMemo(() => (cashStat ? Number(cashStat.priceInDollars).toFixed(4) : null), [cashStat]);
+  const lastCashStat = useCashPriceInLastTWAP();
+  const lasttwap =(Number(lastCashStat) / 100000000000000).toFixed(4); 
+  const tvl = useTotalValueLocked();
   return (
     <StyledDiv>
       <h1>Bomb Finance Summary</h1>
@@ -78,7 +86,11 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
               </td>
               <td>{roundAndFormatNumber(bomb.currentSupply, 2)}</td>
               <td>{roundAndFormatNumber(bomb.totalSupply, 2)}</td>
-              <td>{roundAndFormatNumber(bomb.price.indollar, 2)}<br/>{roundAndFormatNumber(bomb.price.inbnb, 2)}</td>
+              <td>
+                {roundAndFormatNumber(bomb.price.indollar, 2)}
+                <br />
+                {roundAndFormatNumber(bomb.price.inbnb, 2)}
+              </td>
               <td>
                 <img
                   onClick={() => {
@@ -98,7 +110,11 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
               </td>
               <td>{roundAndFormatNumber(bshare.currentSupply, 2)}</td>
               <td>{roundAndFormatNumber(bshare.totalSupply, 2)}</td>
-              <td>{roundAndFormatNumber(bshare.price.indollar, 2)}<br/>{roundAndFormatNumber(bshare.price.inbnb, 2)}</td>
+              <td>
+                {roundAndFormatNumber(bshare.price.indollar, 2)}
+                <br />
+                {roundAndFormatNumber(bshare.price.inbnb, 2)}
+              </td>
               <td>
                 <img
                   onClick={() => {
@@ -118,7 +134,11 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
               </td>
               <td>{roundAndFormatNumber(bbond.currentSupply, 2)}</td>
               <td>{roundAndFormatNumber(bbond.totalSupply, 2)}</td>
-              <td>{roundAndFormatNumber(bbond.price.indollar, 2)}<br/>{roundAndFormatNumber(bbond.price.inbnb, 2)}</td>
+              <td>
+                {roundAndFormatNumber(bbond.price.indollar, 2)}
+                <br />
+                {roundAndFormatNumber(bbond.price.inbnb, 2)}
+              </td>
               <td>
                 <img
                   onClick={() => {
@@ -144,13 +164,13 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
           </div>
           <div className="values">
             <div>
-              Live TWAP: <Styledspan>value</Styledspan>
+              Live TWAP: <Styledspan>{livetwap}</Styledspan>
             </div>
             <div>
-              TVL: <Styledspan>value</Styledspan>
+              TVL: <Styledspan>{tvl}</Styledspan>
             </div>
             <div>
-              Last Epoch TWAP: <Styledspan>value</Styledspan>
+              Last Epoch TWAP: <Styledspan>{lasttwap}</Styledspan>
             </div>
           </div>
         </div>
@@ -159,33 +179,45 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
             lineWidth={15}
             radius={30}
             data={[
-              { title: 'One', value: 10, color: '#E38627' },
-              { title: 'Two', value: 15, color: '#C13C37' },
-              { title: 'Three', value: 20, color: '#6A2135' },
+              { title: 'Bomb', value: 10, color: 'url(#g1)' },
+              { title: 'Bshare', value: 10, color: '#C3C5CB' },
+              { title: 'Bbond', value: 10, color: '#FC7871' },
+              { title: 'Bomb-BTCB', value: 10, color: 'url(#g1)' },
+              { title: 'Bshare-BNB', value: 15, color: '#00ADE8' },
+              { title: 'Others', value: 20, color: '#6A2135' },
             ]}
-          />
-         <div className="row">
-           <div className="column"><div>
-              Live TWAP: <Styledspan>value</Styledspan>
+          >
+            <defs>
+              <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="100.08%" y1=".08%" x2="-0.08%" y2="99.92%">
+                <stop offset=".25" stop-color="#00E8A2" />
+                <stop offset=".941" stop-color="#00ADE8" />
+              </linearGradient>
+            </defs>
+          </PieChart>
+          <div className="row">
+            <div className="column">
+              <div>
+                Bomb : <Styledspan>value</Styledspan>
+              </div>
+              <div>
+                Bshare : <Styledspan>value</Styledspan>
+              </div>
+              <div>
+                Bbond: <Styledspan>value</Styledspan>
+              </div>
             </div>
-            <div>
-              TVL: <Styledspan>value</Styledspan>
-            </div>
-            <div>
-              Last Epoch TWAP: <Styledspan>value</Styledspan>
-          
-          </div></div>
-           <div className="column"><div>
-              Live TWAP: <Styledspan>value</Styledspan>
-            </div>
-            <div>
-              TVL: <Styledspan>value</Styledspan>
-            </div>
-            <div>
-              Last Epoch TWAP: <Styledspan>value</Styledspan>
+            <div className="column">
+              <div>
+                Bomb-BTCB: <Styledspan>value</Styledspan>
+              </div>
+              <div>
+                Bshare-BNB: <Styledspan>value</Styledspan>
+              </div>
+              <div>
+                Others: <Styledspan>value</Styledspan>
+              </div>
             </div>
           </div>
-         </div>
         </div>
       </div>
     </StyledDiv>
