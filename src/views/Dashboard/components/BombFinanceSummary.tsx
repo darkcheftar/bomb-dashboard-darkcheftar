@@ -189,8 +189,8 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
           >
             <defs>
               <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="100.08%" y1=".08%" x2="-0.08%" y2="99.92%">
-                <stop offset=".25" stop-color="#00E8A2" />
-                <stop offset=".941" stop-color="#00ADE8" />
+                <stop offset=".25" stopColor="#00E8A2" />
+                <stop offset=".941" stopColor="#00ADE8" />
               </linearGradient>
             </defs>
           </PieChart>
