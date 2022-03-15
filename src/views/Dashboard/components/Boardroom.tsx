@@ -23,7 +23,7 @@ const Boardroom: React.FC<any> = () => {
     message:'Stake BSHARE and earn BOMB every epoch',
     bg:true,
     tvl:0,
-    totalstaked:totalStaked,
+    totalstaked:getDisplayBalance(totalStaked),
     yourstake:getDisplayBalance(stakedBalance),
     returns:0,
     earned:getDisplayBalance(earning),

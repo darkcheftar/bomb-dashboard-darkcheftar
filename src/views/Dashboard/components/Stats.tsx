@@ -15,7 +15,7 @@ background: ${(props)=>{
 color: white;
 `
 
-const Stats: React.FC<any> = ({heading, bg, icon,message, tvl, totalstaked, yourstake, returns, earned, deposit, withdraw, claimrewards}) => {
+const Stats: React.FC<any> = ({heading, bg, icon,message, tvl, yourstake, returns, earned, deposit, withdraw, claimrewards,totalstaked}) => {
 
   return (
       <StyledStats bg={bg}>
@@ -27,6 +27,8 @@ const Stats: React.FC<any> = ({heading, bg, icon,message, tvl, totalstaked, your
     <p>TVL: ${tvl}</p>
 
     <hr />
+
+    {!!totalstaked && <p>Total Staked: <span>{totalstaked}</span></p>}
     </div>
     <p>Daily Returns: {returns}%</p>
     <p>Your Stake {yourstake} = ${yourstake}</p>
