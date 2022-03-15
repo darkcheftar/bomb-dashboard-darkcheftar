@@ -1,26 +1,48 @@
 import React from 'react';
 import Stats from './Stats';
+import styled from 'styled-components';
 
+const Styleddiv = styled.div`
+margin:10px;
+height:max-content;
+background: rgba(32, 37, 67, 0.5);
+color: white;
+`
 
 const BombFarms: React.FC<any> = () => {
- // dummy start
- const heading = "";
- const icon = "";
- const totalstaked = 0;
- const yourstake = 0;
- const returns = 0;
- const earned = 0;
- const tvl = 0;
- const deposit = ()=>{};
- const withdraw = ()=>{};
- const claimrewards = ()=>{};
- const values = {heading, icon, tvl, totalstaked, yourstake, returns, earned, deposit, withdraw, claimrewards}
- // dummy ends
+  const bombbtcb = {
+    heading:'BOMB-BTCB',
+    bg:false,
+    icon:'',
+    tvl:0,
+    totalstaked:0,
+    yourstake:0,
+    returns:0,
+    earned:0,
+    deposit:() => {},
+    withdraw:() => {},
+    claimrewards:() => {},
+  };
+  const bsharebnb = {
+    heading:'BSHARE-BNB',
+    bg:false,
+    icon:'',
+    tvl:0,
+    totalstaked:0,
+    yourstake:0,
+    returns:0,
+    earned:0,
+    deposit:() => {},
+    withdraw:() => {},
+    claimrewards:() => {},
+  };
   return (
-    <>
-   <Stats {...values} heading='BOMB-BTCB '/>
-   <Stats {...values} heading='BSHARE-BNB'/>
-   </>
+    <Styleddiv>
+    <h1>Bomb Farms</h1>
+    <p>Stake your LP tokens in our farms to start earning $BSHARE</p>
+      <Stats {...bombbtcb} heading="BOMB-BTCB " />
+      <Stats {...bsharebnb} heading="BSHARE-BNB" />
+    </Styleddiv>
   );
 };
 export default BombFarms;

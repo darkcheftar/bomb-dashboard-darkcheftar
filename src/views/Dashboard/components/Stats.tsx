@@ -1,19 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledStats = styled.div`
+interface Props {
+  bg: boolean;
+}
+
+const StyledStats = styled.div<Props>`
 margin:10px;
 height:max-content;
-background: rgba(32, 37, 67, 0.5);
+background: ${(props)=>{
+  if (props.bg) return "rgba(32, 37, 67, 0.5)"
+  return "none"
+  }};
 color: white;
 `
-const Stats: React.FC<any> = ({heading, icon, tvl, totalstaked, yourstake, returns, earned, deposit, withdraw, claimrewards}) => {
+
+const Stats: React.FC<any> = ({heading, bg, icon,message, tvl, totalstaked, yourstake, returns, earned, deposit, withdraw, claimrewards}) => {
 
   return (
-      <StyledStats>
+      <StyledStats bg={bg}>
         <div className="heading">
     <h2>{heading}</h2>
-    <p>Stack BSHARE and earn BOMB every epoch</p>
+    <p>{message}</p>
 
 
     <p>TVL: ${tvl}</p>
