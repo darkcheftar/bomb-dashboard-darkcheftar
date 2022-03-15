@@ -8307,6 +8307,7 @@ __metadata:
     react-feather: ^2.0.8
     react-helmet: ^6.1.0
     react-loading-skeleton: ^2.1.1
+    react-minimal-pie-chart: ^8.2.0
     react-redux: ^7.2.1
     react-router-dom: ^5.2.0
     react-scripts: 3.4.1
@@ -23429,6 +23430,16 @@ __metadata:
   peerDependencies:
     react: ^15.6.1 || ^16.0.0 || ^17.0.0
   checksum: 9e697d28033dfe871e54e69fdcde9c62a1255c165338b5723d71afad4802ba558c2db2479c98684c28f9e39c1658fdd11be363cfb50b74d28b6a1aab5581d4f2
+  languageName: node
+  linkType: hard
+
+"react-minimal-pie-chart@npm:^8.2.0":
+  version: 8.2.0
+  resolution: "react-minimal-pie-chart@npm:8.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  checksum: 83362e6547e17644208964ad0f1e830ba823fde505f895dc0fd77eff6df16bb75850791d86f46c4c75ba85eed88aef4dbb72a597901bb6e4c16171986ab74588
   languageName: node
   linkType: hard
 
