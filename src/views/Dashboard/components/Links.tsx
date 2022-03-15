@@ -5,11 +5,11 @@ import React from 'react';
 const Links: React.FC<any> = () => {
  
   return (
-    <div className="links">
-        <p>investment strategy</p>
-        <p>invest now</p>
-        <p>chat on discord</p>
-        <p>Read Docs</p>
+    <div className="links" style={{margin:'10px'}}>
+        <a href='/dashboard' style={{width:'50%'}}>Read investment strategy &gt;</a>
+        <button style={{width:'100%'}}>Invest Now</button>
+        <button style={{display:'inline', width:"50%"}}>Chat on Discord</button>
+        <button style={{display:'inline', width:"50%"}}>Read Docs</button>
     </div>
   );
 };
