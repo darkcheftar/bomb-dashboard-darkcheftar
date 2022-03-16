@@ -8,7 +8,7 @@ import useStakedBalance from '../../../hooks/useStakedBalance'
 import useEarnings from '../../../hooks/useEarnings'
 import useRedeem from '../../../hooks/useRedeem'
 import useHarvest from '../../../hooks/useHarvest'
-import useApprove from '../../../hooks/useApprove'
+import useApprove,{ApprovalState} from '../../../hooks/useApprove'
 
 import {getDisplayBalance} from '../../../utils/formatBalance';
 
@@ -37,6 +37,7 @@ const BombFarms: React.FC<any> = () => {
     icon:'',
     tvl:bombBtcbstatsOnPool?.TVL,
     yourstake:getDisplayBalance(bombBtcbstakedBalance, bombBtcb.depositToken.decimal),
+    approve:bombBtcbApproveStatus===ApprovalState.APPROVED,
     returns:bombBtcbstatsOnPool?.dailyAPR,
     earned:getDisplayBalance(bombBtcbearnings),
     deposit:bombBtcbApprove,
@@ -50,6 +51,7 @@ const BombFarms: React.FC<any> = () => {
     tvl:bshareBnbstatsOnPool?.TVL,
     yourstake:getDisplayBalance(bshareBnbstakedBalance, bshareBnb.depositToken.decimal),
     returns:bshareBnbstatsOnPool?.dailyAPR,
+    approve:bSharebnbApproveStatus===ApprovalState.APPROVED,
     earned:getDisplayBalance(bshareBnbearnings),
     deposit:bsharebnbApprove,
     withdraw:onRedeemBsharebnb,

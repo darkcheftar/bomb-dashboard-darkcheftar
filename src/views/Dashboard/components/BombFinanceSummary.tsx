@@ -17,11 +17,11 @@ import { roundAndFormatNumber } from '../../../0x';
 import {getDisplayBalance} from '../../../utils/formatBalance';
 
 const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
-  const BOMB=0;//getDisplayBalance(useTokenBalance(bombFinance.BOMB));
-  const BSHARE=0;//getDisplayBalance(useTokenBalance(bombFinance.BSHARE));
-  const BBOND=0;//getDisplayBalance(useTokenBalance(bombFinance.BBOND));
-  const BOMB_BTCB=0;//getDisplayBalance(useTokenBalance(bombFinance.externalTokens['BOMB-BTCB']));
-  const BSHARE_BNB=0;//getDisplayBalance(useTokenBalance(bombFinance.externalTokens['BSHARE-BNB']));
+  const BOMB=getDisplayBalance(useTokenBalance(bombFinance.BOMB));
+  const BSHARE=getDisplayBalance(useTokenBalance(bombFinance.BSHARE));
+  const BBOND=getDisplayBalance(useTokenBalance(bombFinance.BBOND));
+  const BOMB_BTCB=getDisplayBalance(useTokenBalance(bombFinance.externalTokens['BOMB-BTCB-LP']));
+  const BSHARE_BNB=getDisplayBalance(useTokenBalance(bombFinance.externalTokens['BSHARE-BNB-LP']));
   const currentEpoch = useCurrentEpoch();
   const { to } = useTreasuryAllocationTimes();
   const { bomb, bshare, bbond } = details;

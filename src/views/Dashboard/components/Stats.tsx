@@ -5,6 +5,7 @@ const Stats: React.FC<any> = ({
   heading,
   bg,
   icon,
+  approve,
   message,
   tvl,
   yourstake,
@@ -43,6 +44,7 @@ const Stats: React.FC<any> = ({
         </div>
         <div className="functions" style={{alignSelf:'flex-end'}}>
           <StyledButton
+            disabled={!approve}
             onClick={() => {
               deposit();
             }}
@@ -93,10 +95,12 @@ const StyledStats = styled.div<Props>`
     }
   }
 `;
+
+
 const StyledButton = styled.button`
   background:transparent;
-  border: 1px solid #FFFFFF;
-  color:white;
+  border: 1px solid currentColor;
+  color:${p=>p.disabled?'#FFFFFF80':'#FFFFFF'};
   border-radius: 16px;
   margin:3px;
   padding:5px;

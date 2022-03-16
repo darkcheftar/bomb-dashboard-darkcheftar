@@ -10,7 +10,7 @@ import { getDisplayBalance } from '../../../utils/formatBalance';
 import useFetchBoardroomAPR from '../../../hooks/useFetchBoardroomAPR';
 import useRedeemOnBoardroom from '../../../hooks/useRedeemOnBoardroom';
 import useHarvestFromBoardroom from '../../../hooks/useHarvestFromBoardroom';
-import useApprove from '../../../hooks/useApprove';//, {ApprovalState}
+import useApprove,{ApprovalState} from '../../../hooks/useApprove';//, {ApprovalState}
 
 const Boardroom: React.FC<any> = () => {
   const bombFinance = useBombFinance();
@@ -38,6 +38,7 @@ const Boardroom: React.FC<any> = () => {
     icon:'',
     message:'Stake BSHARE and earn BOMB every epoch',
     bg:true,
+    approve:approveStatus===ApprovalState.APPROVED,
     tvl:boardroomTVL,
     totalstaked:getDisplayBalance(totalStaked),
     yourstake:getDisplayBalance(stakedBalance),
