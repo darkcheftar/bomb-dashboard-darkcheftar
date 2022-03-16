@@ -92,24 +92,24 @@ const Dashboard: React.FC = () => {
         </Helmet>
         {!!account ? (
           <Grid container spacing={2}>
-            <Grid xs={12}>
+            <Grid item={true} xs={12}>
               <BombFinanceSummary details={details} bombFinance={bombFinance}/>
             </Grid>
 
-            <Grid xs={6}>
+            <Grid item={true} xs={6}>
               <Links />
               <Boardroom />
             </Grid>
 
-            <Grid xs={6} style={{ flex: 'auto' }}>
+            <Grid item={true} xs={6} style={{ flex: 'auto' }}>
               <News />
             </Grid>
 
-            <Grid xs={12}>
+            <Grid item={true} xs={12}>
               <BondFarms />
             </Grid>
 
-            <Grid xs={12}>
+            <Grid item={true} xs={12}>
               <Bonds />
             </Grid>
           </Grid>
