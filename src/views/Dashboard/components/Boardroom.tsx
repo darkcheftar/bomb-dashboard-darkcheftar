@@ -8,27 +8,30 @@ import useBombFinance from '../../../hooks/useBombFinance';
 
 import { getDisplayBalance } from '../../../utils/formatBalance';
 import useFetchBoardroomAPR from '../../../hooks/useFetchBoardroomAPR';
+import useRedeemOnBoardroom from '../../../hooks/useRedeemOnBoardroom';
+import useHarvestFromBoardroom from '../../../hooks/useHarvestFromBoardroom';
+import useApprove from '../../../hooks/useApprove';//, {ApprovalState}
 
 const Boardroom: React.FC<any> = () => {
-  const bombFinanace = useBombFinance();
+  const bombFinance = useBombFinance();
   const [boardroomTVL, setBoardroomTVL] = useState(0);
   useEffect(()=>{
     const TVLcalc = async ()=>{
-      const BSHAREPrice = (await bombFinanace.getShareStat()).priceInDollars;
-      const boardroomtShareBalanceOf = await bombFinanace.BSHARE.balanceOf(bombFinanace.currentBoardroom().address);
-      setBoardroomTVL(Number(getDisplayBalance(boardroomtShareBalanceOf, bombFinanace.BSHARE.decimal)) * Number(BSHAREPrice));
+      const BSHAREPrice = (await bombFinance.getShareStat()).priceInDollars;
+      const boardroomtShareBalanceOf = await bombFinance.BSHARE.balanceOf(bombFinance.currentBoardroom().address);
+      setBoardroomTVL(Number(getDisplayBalance(boardroomtShareBalanceOf, bombFinance.BSHARE.decimal)) * Number(BSHAREPrice));
     }
     TVLcalc();
     },
-    [bombFinanace]
+    [bombFinance]
   );
-  const deposit = () => {};
-  const withdraw = () => {};
-  const claimrewards = () => {};
+  
   const stakedBalance = useStakedBalanceOnBoardroom();
   const totalStaked = useTotalStakedOnBoardroom();
   const earning = useEarningsOnBoardroom();
-
+  const { onRedeem } = useRedeemOnBoardroom();
+  const {onReward} = useHarvestFromBoardroom();
+  const [approveStatus, approve] = useApprove(bombFinance.BSHARE, bombFinance.contracts.Boardroom.address);
   const values = {
    
     heading:'Boardroom',
@@ -40,9 +43,9 @@ const Boardroom: React.FC<any> = () => {
     yourstake:getDisplayBalance(stakedBalance),
     returns:useFetchBoardroomAPR()/365,
     earned:getDisplayBalance(earning),
-    deposit,
-    withdraw,
-    claimrewards,
+    deposit:approve,
+    withdraw:onRedeem,
+    claimrewards:onReward,
   };
   return (
     <>
