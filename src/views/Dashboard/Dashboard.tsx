@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import HomeImage from '../../assets/img/background.jpg';
+import HomeImage from '../../assets/img/dashboard-background.jpg';
 import { createGlobalStyle } from 'styled-components';
 import { Switch } from 'react-router-dom';
 import Page from '../../components/Page';
@@ -11,7 +11,6 @@ import News from './components/News';
 import BondFarms from './components/BombFarms';
 import Bonds from './components/Bonds';
 import Links from './components/Links';
-import { Grid } from '@material-ui/core';
 import { useWallet } from 'use-wallet';
 import useBombFinance from '../../hooks/useBombFinance';
 import useBombStats from '../../hooks/useBombStats';
@@ -22,6 +21,7 @@ const BackgroundImage = createGlobalStyle`
     background: url(${HomeImage}) repeat !important;
     background-size: cover !important;
     background-color: #171923;
+    color:white;
   }
 `;
 
@@ -69,17 +69,17 @@ const Dashboard: React.FC = () => {
     bomb: {
       currentSupply: bombCirculatingSupply,
       totalSupply: bombTotalSupply,
-      price: { indollar: bombPriceInDollars,inbnb:bombPriceInBNB    }
+      price: { indollar: bombPriceInDollars, inbnb: bombPriceInBNB },
     },
     bshare: {
       currentSupply: bShareCirculatingSupply,
       totalSupply: bShareTotalSupply,
-      price: { indollar: bSharePriceInDollars, inbnb:bSharePriceInBNB },
+      price: { indollar: bSharePriceInDollars, inbnb: bSharePriceInBNB },
     },
     bbond: {
       currentSupply: tBondCirculatingSupply,
       totalSupply: tBondTotalSupply,
-      price: { indollar: tBondPriceInDollars, inbnb:tBondPriceInBNB },
+      price: { indollar: tBondPriceInDollars, inbnb: tBondPriceInBNB },
     },
   };
 
@@ -91,28 +91,26 @@ const Dashboard: React.FC = () => {
           <title>{TITLE}</title>
         </Helmet>
         {!!account ? (
-          <Grid container spacing={2}>
-            <Grid item={true} xs={12}>
-              <BombFinanceSummary details={details} bombFinance={bombFinance}/>
-            </Grid>
+          <div>
+            <BombFinanceSummary details={details} bombFinance={bombFinance} />
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+              <div>
+                <Links />
+                <Boardroom />
+              </div>
+              <div>
+                <News />
+              </div>
+            </div>
 
-            <Grid item={true} xs={6}>
-              <Links />
-              <Boardroom />
-            </Grid>
-
-            <Grid item={true} xs={6} style={{ flex: 'auto' }}>
-              <News />
-            </Grid>
-
-            <Grid item={true} xs={12}>
+            <div>
               <BondFarms />
-            </Grid>
+            </div>
 
-            <Grid item={true} xs={12}>
+            <div>
               <Bonds />
-            </Grid>
-          </Grid>
+            </div>
+          </div>
         ) : (
           <UnlockWallet />
         )}

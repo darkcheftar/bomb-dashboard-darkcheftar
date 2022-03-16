@@ -3,10 +3,12 @@ import styled from 'styled-components';
 
 
 const Styleddiv = styled.div`
-margin:10px;
-height:90%;
-background: rgba(32, 37, 67, 0.5);
-color: white;
+margin: 10px;
+height: 90%;
+ background: #23284bbf;
+  border:  1px solid #728cdf;
+  border-radius: 10px;
+  padding: 10px;
 `
 
 const News: React.FC<any> = () => {

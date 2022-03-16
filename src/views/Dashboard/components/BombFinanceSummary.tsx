@@ -1,4 +1,4 @@
-import React,{useMemo} from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import MetamaskFox from '../../../assets/img/metamask-fox.svg';
 import BombImage from '../../../assets/img/bomb.png';
@@ -11,57 +11,24 @@ import useTreasuryAllocationTimes from '../../../hooks/useTreasuryAllocationTime
 import useCashPriceInEstimatedTWAP from '../../../hooks/useCashPriceInEstimatedTWAP';
 import useTotalValueLocked from '../../../hooks/useTotalValueLocked';
 import useCashPriceInLastTWAP from '../../../hooks/useCashPriceInLastTWAP';
+import useTokenBalance from '../../../hooks/useTokenBalance';
 import { PieChart } from 'react-minimal-pie-chart';
 import { roundAndFormatNumber } from '../../../0x';
-
-const StyledDiv = styled.div`
-  height: max-content;
-  background: rgba(32, 37, 67, 0.5);
-  color: white;
-  & > h1 {
-    color: white;
-    font-family: Nunito;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 30px;
-    letter-spacing: 0em;
-    text-transform: none;
-    text-align: center;
-    padding: 0;
-  }
-  & > hr {
-    width: 90%;
-    border: 0.5px solid rgba(195, 197, 203, 0.75);
-  }
-  & table {
-    width: max-content;
-  }
-  & .summarycontainer {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
-  & svg {
-    height: 100px;
-  }
-  & .row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-const Styledspan = styled.span`
-  color: #00e8a2; ;
-`;
+import {getDisplayBalance} from '../../../utils/formatBalance';
 
 const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
+  const BOMB=0;//getDisplayBalance(useTokenBalance(bombFinance.BOMB));
+  const BSHARE=0;//getDisplayBalance(useTokenBalance(bombFinance.BSHARE));
+  const BBOND=0;//getDisplayBalance(useTokenBalance(bombFinance.BBOND));
+  const BOMB_BTCB=0;//getDisplayBalance(useTokenBalance(bombFinance.externalTokens['BOMB-BTCB']));
+  const BSHARE_BNB=0;//getDisplayBalance(useTokenBalance(bombFinance.externalTokens['BSHARE-BNB']));
   const currentEpoch = useCurrentEpoch();
   const { to } = useTreasuryAllocationTimes();
   const { bomb, bshare, bbond } = details;
   const cashStat = useCashPriceInEstimatedTWAP();
   const livetwap = useMemo(() => (cashStat ? Number(cashStat.priceInDollars).toFixed(4) : null), [cashStat]);
   const lastCashStat = useCashPriceInLastTWAP();
-  const lasttwap =(Number(lastCashStat) / 100000000000000).toFixed(4); 
+  const lasttwap = (Number(lastCashStat) / 100000000000000).toFixed(4);
   const tvl = useTotalValueLocked();
   return (
     <StyledDiv>
@@ -89,7 +56,7 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
               <td>
                 {roundAndFormatNumber(bomb.price.indollar, 2)}
                 <br />
-                {roundAndFormatNumber(bomb.price.inbnb, 2)}
+                {roundAndFormatNumber(bomb.price.inbnb, 2)}BTCB
               </td>
               <td>
                 <img
@@ -113,7 +80,7 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
               <td>
                 {roundAndFormatNumber(bshare.price.indollar, 2)}
                 <br />
-                {roundAndFormatNumber(bshare.price.inbnb, 2)}
+                {roundAndFormatNumber(bshare.price.inbnb, 2)}BTCB
               </td>
               <td>
                 <img
@@ -137,7 +104,7 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
               <td>
                 {roundAndFormatNumber(bbond.price.indollar, 2)}
                 <br />
-                {roundAndFormatNumber(bbond.price.inbnb, 2)}
+                {roundAndFormatNumber(bbond.price.inbnb, 2)}BTCB
               </td>
               <td>
                 <img
@@ -177,7 +144,7 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
         <div className="graphicsummary">
           <PieChart
             lineWidth={15}
-            radius={30}
+            radius={50}
             data={[
               { title: 'Bomb', value: 10, color: 'url(#g1)' },
               { title: 'Bshare', value: 10, color: '#C3C5CB' },
@@ -197,21 +164,21 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
           <div className="row">
             <div className="column">
               <div>
-                Bomb : <Styledspan>value</Styledspan>
+                Bomb : <Styledspan>{BOMB}</Styledspan>
               </div>
               <div>
-                Bshare : <Styledspan>value</Styledspan>
+                Bshare : <Styledspan>{BSHARE}</Styledspan>
               </div>
               <div>
-                Bbond: <Styledspan>value</Styledspan>
+                Bbond: <Styledspan>{BBOND}</Styledspan>
               </div>
             </div>
             <div className="column">
               <div>
-                Bomb-BTCB: <Styledspan>value</Styledspan>
+                Bomb-BTCB: <Styledspan>{BOMB_BTCB}</Styledspan>
               </div>
               <div>
-                Bshare-BNB: <Styledspan>value</Styledspan>
+                Bshare-BNB: <Styledspan>{BSHARE_BNB}</Styledspan>
               </div>
               <div>
                 Others: <Styledspan>value</Styledspan>
@@ -223,4 +190,34 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
     </StyledDiv>
   );
 };
+
+const StyledDiv = styled.div`
+  height:min-content;
+  text-align: center;
+  background: #20254380;
+
+  h1 {
+    font-size: 1.25rem;;
+    color: white;
+    font-weight: normal;
+    text-transform: none;
+  }
+
+  & .summarycontainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  & svg {
+    height: 150px;
+    width: 150px;
+  }
+  & .row{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+  }
+`;
+
+const Styledspan = styled.span``;
+
 export default BombFinanceSummary;

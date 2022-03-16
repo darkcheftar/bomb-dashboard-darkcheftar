@@ -1,0 +1,29 @@
+ Volume in drive C is New Volume
+ Volume Serial Number is C618-BA49
+
+ Directory of C:\Users\mtaru\Desktop\Dyeus-web3\bomb-dashboard-darkcheftar
+
+16-03-2022  18:13    <DIR>          .
+15-03-2022  07:53    <DIR>          ..
+15-03-2022  07:57    <DIR>          .github
+15-03-2022  09:08               410 .gitignore
+15-03-2022  09:08    <DIR>          .netlify
+15-03-2022  07:57                70 .prettierignore
+15-03-2022  07:57               134 .prettierrc
+15-03-2022  07:57    <DIR>          .vscode
+15-03-2022  07:57    <DIR>          .yarn
+15-03-2022  07:57                69 .yarnrc.yml
+16-03-2022  00:57    <DIR>          build
+16-03-2022  18:13                 0 clip
+15-03-2022  07:57             2,173 CODE_OF_CONDUCT.md
+15-03-2022  07:57             3,472 CONTRIBUTING.md
+15-03-2022  07:57             1,088 LICENSE
+16-03-2022  01:10    <DIR>          node_modules
+16-03-2022  01:10             2,501 package.json
+15-03-2022  07:57    <DIR>          public
+15-03-2022  07:57             1,264 README.md
+15-03-2022  08:05    <DIR>          src
+15-03-2022  07:57               510 tsconfig.json
+16-03-2022  01:10         1,080,793 yarn.lock
+              12 File(s)      1,092,484 bytes
+              10 Dir(s)  328,927,485,952 bytes free

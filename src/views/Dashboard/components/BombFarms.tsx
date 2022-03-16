@@ -11,12 +11,7 @@ import useHarvest from '../../../hooks/useHarvest'
 import useApprove from '../../../hooks/useApprove'
 
 import {getDisplayBalance} from '../../../utils/formatBalance';
-const Styleddiv = styled.div`
-margin:10px;
-height:max-content;
-background: rgba(32, 37, 67, 0.5);
-color: white;
-`
+
 
 const BombFarms: React.FC<any> = () => {
   const bombBtcb = useBank('BombBtcbLPBShareRewardPool');
@@ -65,8 +60,22 @@ const BombFarms: React.FC<any> = () => {
     <h1>Bomb Farms</h1>
     <p>Stake your LP tokens in our farms to start earning $BSHARE</p>
       <Stats {...bombbtcb} />
+      <hr />
       <Stats {...bsharebnb} />
     </Styleddiv>
   );
 };
+
+const Styleddiv = styled.div`
+  margin:10px;
+  background:#23284bbf;
+  border:  1px solid #728cdf;
+  border-radius: 10px;
+  padding: 10px;
+  h1{
+    color:white;
+    font-size:1.25rem;
+  }
+`
+
 export default BombFarms;
