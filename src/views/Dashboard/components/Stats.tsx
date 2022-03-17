@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import TokenSymbol from '../../../components/TokenSymbol';
 
 const Stats: React.FC<any> = ({
   heading,
@@ -18,10 +19,15 @@ const Stats: React.FC<any> = ({
 }) => {
   return (
     <StyledStats bg={bg}>
-      <div className="heading" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-        <h1>
-          {heading} <span>Recommended</span>
-          {message && <p style={{ fontSize: '0.8rem' }}>{message}</p>}
+      <div className="heading" style={{ display: 'grid', gridTemplateColumns: '5fr 5fr' }}>
+        <h1 style={{ display: 'grid', gridTemplateColumns: '0.3fr 5fr' }}>
+          <div style={{ alignSelf:'center' }}>
+            <TokenSymbol size={32} symbol={icon} />
+          </div>
+          <div>
+            {heading} <span>Recommended</span>
+            {message && <p style={{ fontSize: '0.8rem' }}>{message}</p>}
+          </div>
         </h1>
         <p style={{ justifySelf: 'flex-end', alignSelf: 'flex-end' }}>TVL: ${tvl}</p>
       </div>
@@ -32,17 +38,17 @@ const Stats: React.FC<any> = ({
           Total Staked: <span>{totalstaked}</span>
         </p>
       )}
-      <div className="stats" style={{display:'grid',gridTemplateColumns:'3fr 1fr'}}>
-        <div className="data" style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr'}}>
-        <p>Daily Returns: {returns}%</p>
-        <p>
-          Your Stake {yourstake} = ${yourstake}
-        </p>
-        <p>
-          Earned {earned} = ${earned}
-        </p>
+      <div className="stats" style={{ display: 'grid', gridTemplateColumns: '3fr 1fr' }}>
+        <div className="data" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+          <p>Daily Returns: {returns}%</p>
+          <p>
+            Your Stake {yourstake} = ${yourstake}
+          </p>
+          <p>
+            Earned {earned} = ${earned}
+          </p>
         </div>
-        <div className="functions" style={{alignSelf:'flex-end'}}>
+        <div className="functions" style={{ alignSelf: 'flex-end' }}>
           <StyledButton
             disabled={!approve}
             onClick={() => {
@@ -96,14 +102,13 @@ const StyledStats = styled.div<Props>`
   }
 `;
 
-
 const StyledButton = styled.button`
-  background:transparent;
+  background: transparent;
   border: 1px solid currentColor;
-  color:${p=>p.disabled?'#FFFFFF80':'#FFFFFF'};
+  color: ${(p) => (p.disabled ? '#FFFFFF80' : '#FFFFFF')};
   border-radius: 16px;
-  margin:3px;
-  padding:5px;
-  margin:0 auto;
+  margin: 3px;
+  padding: 5px;
+  margin: 0 auto;
 `;
 export default Stats;

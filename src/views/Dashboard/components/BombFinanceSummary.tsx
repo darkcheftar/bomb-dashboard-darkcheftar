@@ -1,9 +1,6 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import MetamaskFox from '../../../assets/img/metamask-fox.svg';
-import BombImage from '../../../assets/img/bomb.png';
-import BshareImage from '../../../assets/img/bshares.png';
-import BbondImage from '../../../assets/img/bbond.png';
 import ProgressCountdown from '../../Boardroom/components/ProgressCountdown';
 import moment from 'moment';
 import useCurrentEpoch from '../../../hooks/useCurrentEpoch';
@@ -15,6 +12,7 @@ import useTokenBalance from '../../../hooks/useTokenBalance';
 import { PieChart } from 'react-minimal-pie-chart';
 import { roundAndFormatNumber } from '../../../0x';
 import {getDisplayBalance} from '../../../utils/formatBalance';
+import TokenSymbol from '../../../components/TokenSymbol';
 
 const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
   const BOMB=getDisplayBalance(useTokenBalance(bombFinance.BOMB));
@@ -48,7 +46,7 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
           <tbody>
             <tr>
               <td>
-                <img src={BombImage} alt="BOMB" style={{ height: '20px' }} />
+               <TokenSymbol size={20} symbol={'BOMB'} />
                 $BOMB
               </td>
               <td>{roundAndFormatNumber(bomb.currentSupply, 2)}</td>
@@ -71,8 +69,7 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
             </tr>
             <tr>
               <td>
-                {' '}
-                <img src={BshareImage} alt="BSHARE" style={{ height: '20px' }} />
+              <TokenSymbol size={20} symbol={'BSHARE'} />
                 $BSHARE
               </td>
               <td>{roundAndFormatNumber(bshare.currentSupply, 2)}</td>
@@ -95,8 +92,7 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
             </tr>
             <tr>
               <td>
-                {' '}
-                <img src={BbondImage} alt="BBOND" style={{ height: '20px' }} />
+              <TokenSymbol size={20} symbol={'BBOND'} />
                 $BBOND
               </td>
               <td>{roundAndFormatNumber(bbond.currentSupply, 2)}</td>
@@ -164,24 +160,24 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
           <div className="row">
             <div className="column">
               <div>
-                Bomb : <Styledspan>{BOMB}</Styledspan>
+              <TokenSymbol size={20} symbol={'BOMB'}/>Bomb : <Styledspan>{BOMB}</Styledspan>
               </div>
               <div>
-                Bshare : <Styledspan>{BSHARE}</Styledspan>
+              <TokenSymbol size={20} symbol={'BSHARE'}/>Bshare : <Styledspan>{BSHARE}</Styledspan>
               </div>
               <div>
-                Bbond: <Styledspan>{BBOND}</Styledspan>
+              <TokenSymbol size={20} symbol={'BBOND'}/>Bbond: <Styledspan>{BBOND}</Styledspan>
               </div>
             </div>
             <div className="column">
               <div>
-                Bomb-BTCB: <Styledspan>{BOMB_BTCB}</Styledspan>
+              <TokenSymbol size={20} symbol={'BOMB-BTCB-LP'}/>Bomb-BTCB: <Styledspan>{BOMB_BTCB}</Styledspan>
               </div>
               <div>
-                Bshare-BNB: <Styledspan>{BSHARE_BNB}</Styledspan>
+              <TokenSymbol size={20} symbol={'BSHARE-BNB-LP'}/>Bshare-BNB: <Styledspan>{BSHARE_BNB}</Styledspan>
               </div>
               <div>
-                Others: <Styledspan>value</Styledspan>
+               Others: <Styledspan>value</Styledspan>
               </div>
             </div>
           </div>

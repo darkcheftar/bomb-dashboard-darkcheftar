@@ -35,7 +35,7 @@ const Boardroom: React.FC<any> = () => {
   const values = {
    
     heading:'Boardroom',
-    icon:'',
+    icon:'BSHARE',
     message:'Stake BSHARE and earn BOMB every epoch',
     bg:true,
     approve:approveStatus===ApprovalState.APPROVED,

@@ -34,7 +34,7 @@ const BombFarms: React.FC<any> = () => {
   const bombbtcb = {
     heading:'BOMB-BTCB',
     bg:false,
-    icon:'',
+    icon:bombBtcb.depositTokenName,
     tvl:bombBtcbstatsOnPool?.TVL,
     yourstake:getDisplayBalance(bombBtcbstakedBalance, bombBtcb.depositToken.decimal),
     approve:bombBtcbApproveStatus===ApprovalState.APPROVED,
@@ -47,7 +47,7 @@ const BombFarms: React.FC<any> = () => {
   const bsharebnb = {
     heading:'BSHARE-BNB',
     bg:false,
-    icon:'',
+    icon:bshareBnb.depositTokenName,
     tvl:bshareBnbstatsOnPool?.TVL,
     yourstake:getDisplayBalance(bshareBnbstakedBalance, bshareBnb.depositToken.decimal),
     returns:bshareBnbstatsOnPool?.dailyAPR,

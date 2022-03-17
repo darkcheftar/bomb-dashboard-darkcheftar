@@ -6,6 +6,7 @@ import useTokenBalance from '../../../hooks/useTokenBalance';
 import useBombFinance from '../../../hooks/useBombFinance';
 
 import { getDisplayBalance } from '../../../utils/formatBalance';
+import TokenSymbol from '../../../components/TokenSymbol';
 
 
 const Bonds: React.FC<any> = () => {
@@ -15,8 +16,15 @@ const Bonds: React.FC<any> = () => {
 
   return (
     <Styleddiv>
+      <div style={{display:'grid',gridTemplateColumns:'0.3fr 7fr'}}>
+        <div style={{alignSelf:'center'}}>
+      <TokenSymbol size={32} symbol='BBOND' />
+      </div>
+      <div>
       <h1>Bonds</h1>
       <p>BBOND can be purchased only on contraction periods, when TWAP of BOMB is below 1</p>
+      </div>
+      </div>
       <div className="grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr'}}>
         <div>
           <div>Current Price: (Bomb)^2</div>
@@ -47,6 +55,7 @@ const Styleddiv = styled.div`
   border-radius: 10px;
   padding: 10px;
   h1{
+    text-transform:none;
     color:white;
     font-size: 1.25rem;
   }
