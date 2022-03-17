@@ -3,7 +3,7 @@ import React from 'react';
 const Links: React.FC<any> = () => {
   return (
     <div className="links" style={{ margin: '10px' }}>
-      <a href="/dashboard" style={{ width: '100%', display: 'block', textAlign: 'right',color: "#9EE6FF"}}>
+      <a href="https://docs.bomb.money/welcome-start-here/strategies" style={{ width: '100%', display: 'block', textAlign: 'right',color: "#9EE6FF"}}>
         Read investment strategy &gt;
       </a>
       <button
@@ -16,16 +16,17 @@ const Links: React.FC<any> = () => {
           fontStyle: 'normal',
           fontWeight: '800',
           color: 'white',
+          cursor: 'pointer'
         }}
       >
         Invest Now
       </button>
-      <button
+      <button onClick={()=>{window.location.href='http://discord.bomb.money/'}}
         style={secondarybutton}
       >
         Chat on Discord
       </button>
-      <button  style={secondarybutton}>Read Docs</button>
+      <button onClick={()=>{window.location.href='https://docs.bomb.money/welcome-start-here/readme'}} style={secondarybutton}>Read Docs</button>
     </div>
   );
 };
@@ -39,6 +40,7 @@ const secondarybutton = {
   fontStyle: 'normal',
   fontWeight: '700',
   padding: '10px',
-  color:'black'
+  color:'black',
+  cursor:'pointer'
 }
 export default Links;
