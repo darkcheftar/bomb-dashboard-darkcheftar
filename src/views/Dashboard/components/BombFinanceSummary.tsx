@@ -52,7 +52,7 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
               <td>{roundAndFormatNumber(bomb.currentSupply, 2)}</td>
               <td>{roundAndFormatNumber(bomb.totalSupply, 2)}</td>
               <td>
-                {roundAndFormatNumber(bomb.price.indollar, 2)}
+                ${roundAndFormatNumber(bomb.price.indollar, 2)}
                 <br />
                 {roundAndFormatNumber(bomb.price.inbnb, 2)}BTCB
               </td>
@@ -62,7 +62,7 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
                     bombFinance.watchAssetInMetamask('BOMB');
                   }}
                   alt="metamask fox"
-                  style={{ width: '20px', filter: 'grayscale(100%)' }}
+                  style={{ width: '20px' }}
                   src={MetamaskFox}
                 />
               </td>
@@ -75,17 +75,17 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
               <td>{roundAndFormatNumber(bshare.currentSupply, 2)}</td>
               <td>{roundAndFormatNumber(bshare.totalSupply, 2)}</td>
               <td>
-                {roundAndFormatNumber(bshare.price.indollar, 2)}
+                ${roundAndFormatNumber(bshare.price.indollar, 2)}
                 <br />
                 {roundAndFormatNumber(bshare.price.inbnb, 2)}BTCB
               </td>
               <td>
                 <img
                   onClick={() => {
-                    bombFinance.watchAssetInMetamask('BOMB');
+                    bombFinance.watchAssetInMetamask('BSHARE');
                   }}
                   alt="metamask fox"
-                  style={{ width: '20px', filter: 'grayscale(100%)' }}
+                  style={{ width: '20px' }}
                   src={MetamaskFox}
                 />
               </td>
@@ -98,17 +98,17 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
               <td>{roundAndFormatNumber(bbond.currentSupply, 2)}</td>
               <td>{roundAndFormatNumber(bbond.totalSupply, 2)}</td>
               <td>
-                {roundAndFormatNumber(bbond.price.indollar, 2)}
+                ${roundAndFormatNumber(bbond.price.indollar, 2)}
                 <br />
                 {roundAndFormatNumber(bbond.price.inbnb, 2)}BTCB
               </td>
               <td>
                 <img
                   onClick={() => {
-                    bombFinance.watchAssetInMetamask('BOMB');
+                    bombFinance.watchAssetInMetamask('BBOND');
                   }}
                   alt="metamask fox"
-                  style={{ width: '20px', filter: 'grayscale(100%)' }}
+                  style={{ width: '20px' }}
                   src={MetamaskFox}
                 />
               </td>
@@ -117,20 +117,22 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
         </table>
         <div className="epochsummary">
           <div className="currentEpoch">
-            {' '}
             <div>Current Epoch: </div>
-            <div>{Number(currentEpoch)}</div>
+            <div style={{fontSize:'2rem'}}>{Number(currentEpoch)}</div>
           </div>
-          <div className="nextEpoch">
-            <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" /> Next
-            Epoch in
+          <hr style={{width:'70%'}} />
+          <div className="nextEpoch" style={{fontSize:'2.5rem'}}>
+            <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" /> 
+            <div style={{fontSize:'1.5rem'}}>Next Epoch in</div>
           </div>
-          <div className="values">
+         <hr style={{width:'50%'}} />
+          <div className="values" style={{margin:'10px'}}>
+
             <div>
               Live TWAP: <Styledspan>{livetwap}</Styledspan>
             </div>
             <div>
-              TVL: <Styledspan>{tvl}</Styledspan>
+              TVL: <Styledspan>{ roundAndFormatNumber(Number(tvl),2)}</Styledspan>
             </div>
             <div>
               Last Epoch TWAP: <Styledspan>{lasttwap}</Styledspan>
@@ -160,24 +162,24 @@ const BombFinanceSummary: React.FC<any> = ({ bombFinance, details }) => {
           <div className="row">
             <div className="column">
               <div>
-              <TokenSymbol size={20} symbol={'BOMB'}/>Bomb : <Styledspan>{BOMB}</Styledspan>
+              <TokenSymbol size={20} symbol={'BOMB'}/>Bomb : <span>{BOMB}</span>
               </div>
               <div>
-              <TokenSymbol size={20} symbol={'BSHARE'}/>Bshare : <Styledspan>{BSHARE}</Styledspan>
+              <TokenSymbol size={20} symbol={'BSHARE'}/>Bshare : <span>{BSHARE}</span>
               </div>
               <div>
-              <TokenSymbol size={20} symbol={'BBOND'}/>Bbond: <Styledspan>{BBOND}</Styledspan>
+              <TokenSymbol size={20} symbol={'BBOND'}/>Bbond: <span>{BBOND}</span>
               </div>
             </div>
             <div className="column">
               <div>
-              <TokenSymbol size={20} symbol={'BOMB-BTCB-LP'}/>Bomb-BTCB: <Styledspan>{BOMB_BTCB}</Styledspan>
+              <TokenSymbol size={20} symbol={'BOMB-BTCB-LP'}/>Bomb-BTCB: <span>{BOMB_BTCB}</span>
               </div>
               <div>
-              <TokenSymbol size={20} symbol={'BSHARE-BNB-LP'}/>Bshare-BNB: <Styledspan>{BSHARE_BNB}</Styledspan>
+              <TokenSymbol size={20} symbol={'BSHARE-BNB-LP'}/>Bshare-BNB: <span>{BSHARE_BNB}</span>
               </div>
               <div>
-               Others: <Styledspan>value</Styledspan>
+               Others: <span>value</span>
               </div>
             </div>
           </div>
@@ -212,8 +214,15 @@ const StyledDiv = styled.div`
     grid-template-columns: 1fr 1fr;
     text-align: left;
   }
+  & tr{
+    border-bottom:1px solid rgba(195, 197, 203, 0.75);
+  }
 `;
 
-const Styledspan = styled.span``;
+
+const Styledspan = styled.span`
+    color: #00E8A2;
+
+`;
 
 export default BombFinanceSummary;
