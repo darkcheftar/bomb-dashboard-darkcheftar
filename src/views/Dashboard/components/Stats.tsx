@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import TokenSymbol from '../../../components/TokenSymbol';
+import useWithdrawCheck from '../../../hooks/boardroom/useWithdrawCheck';
+import useClaimRewardCheck from '../../../hooks/boardroom/useClaimRewardCheck';
 
 const Stats: React.FC<any> = ({
   heading,
@@ -9,6 +11,7 @@ const Stats: React.FC<any> = ({
   approve,
   message,
   tvl,
+  yourstakeInDollars,
   yourstake,
   returns,
   earned,
@@ -17,6 +20,10 @@ const Stats: React.FC<any> = ({
   claimrewards,
   totalstaked,
 }) => {
+
+  const canWithdraw = useWithdrawCheck();
+  const canClaimReward = useClaimRewardCheck();
+
   return (
     <StyledStats bg={bg}>
       <div className="heading" style={{ display: 'grid', gridTemplateColumns: '5fr 5fr' }}>
@@ -40,24 +47,28 @@ const Stats: React.FC<any> = ({
       )}
       <div className="stats" style={{ display: 'grid', gridTemplateColumns: '3fr 1fr' }}>
         <div className="data" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
-          <p>Daily Returns: {returns}%</p>
-          <p>
-            Your Stake {yourstake} = ${yourstake}
-          </p>
-          <p>
-            Earned {earned} = ${earned}
-          </p>
+          <div><div>Daily Returns:</div> <div>  {returns}%</div></div>
+          <div>
+            <div>our Stake </div>
+            <div>{yourstake}</div>
+             <div>	&#8776; ${yourstakeInDollars}</div>
+          </div>
+          <div>
+            <div>Earned </div>
+            <div>{earned} </div>
+            <div>	&#8776; ${earned}</div>
+          </div>
         </div>
         <div className="functions" style={{ alignSelf: 'flex-end' }}>
           <StyledButton
-            disabled={!approve}
+            disabled={approve}
             onClick={() => {
               deposit();
             }}
           >
             Deposit
           </StyledButton>
-          <StyledButton
+          <StyledButton disabled={Number(yourstake) === 0 || (!canWithdraw && !canClaimReward)}
             onClick={() => {
               withdraw();
             }}
@@ -65,6 +76,7 @@ const Stats: React.FC<any> = ({
             Withdraw
           </StyledButton>
           <StyledButton
+          disabled={Number(earned) === 0 || !canClaimReward}
             onClick={() => {
               claimrewards();
             }}
@@ -110,5 +122,10 @@ const StyledButton = styled.button`
   margin: 3px;
   padding: 5px;
   margin: 0 auto;
+  cursor:${p=>p.disabled?'not-allowed':'pointer'};
+  &:hover{
+    background-color: ${p=>p.disabled?'transparent':'#FFFFFF'};
+    color:${p=>p.disabled?'#FFFFFF80':'black'};
+  }
 `;
 export default Stats;

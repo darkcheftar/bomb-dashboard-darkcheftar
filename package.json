@@ -50,7 +50,7 @@
     "web3": "^1.2.11"
   },
   "scripts": {
-    "start": "set NODE_ENV=development && react-scripts start",
+    "start": "react-scripts start",
     "build": "set CI= GENERATE_SOURCEMAP=false && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

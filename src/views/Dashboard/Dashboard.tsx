@@ -29,7 +29,7 @@ const TITLE = 'bomb.money | Dashboard';
 const Dashboard: React.FC = () => {
   const bombStats = useBombStats();
   const bShareStats = usebShareStats();
-  const tBondStats = useBondStats();
+  const bBondStats = useBondStats();
   const bombFinance = useBombFinance();
   const { account } = useWallet();
   const bombPriceInDollars = useMemo(
@@ -54,16 +54,16 @@ const Dashboard: React.FC = () => {
   );
   const bShareTotalSupply = useMemo(() => (bShareStats ? String(bShareStats.totalSupply) : null), [bShareStats]);
 
-  const tBondPriceInDollars = useMemo(
-    () => (tBondStats ? Number(tBondStats.priceInDollars).toFixed(2) : null),
-    [tBondStats],
+  const bBondPriceInDollars = useMemo(
+    () => (bBondStats ? Number(bBondStats.priceInDollars).toFixed(2) : null),
+    [bBondStats],
   );
-  const tBondPriceInBNB = useMemo(() => (tBondStats ? Number(tBondStats.tokenInFtm).toFixed(4) : null), [tBondStats]);
-  const tBondCirculatingSupply = useMemo(
-    () => (tBondStats ? String(tBondStats.circulatingSupply) : null),
-    [tBondStats],
+  const bBondPriceInBNB = useMemo(() => (bBondStats ? Number(bBondStats.tokenInFtm).toFixed(4) : null), [bBondStats]);
+  const bBondCirculatingSupply = useMemo(
+    () => (bBondStats ? String(bBondStats.circulatingSupply) : null),
+    [bBondStats],
   );
-  const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
+  const bBondTotalSupply = useMemo(() => (bBondStats ? String(bBondStats.totalSupply) : null), [bBondStats]);
 
   const details = {
     bomb: {
@@ -77,9 +77,9 @@ const Dashboard: React.FC = () => {
       price: { indollar: bSharePriceInDollars, inbnb: bSharePriceInBNB },
     },
     bbond: {
-      currentSupply: tBondCirculatingSupply,
-      totalSupply: tBondTotalSupply,
-      price: { indollar: tBondPriceInDollars, inbnb: tBondPriceInBNB },
+      currentSupply: bBondCirculatingSupply,
+      totalSupply: bBondTotalSupply,
+      price: { indollar: bBondPriceInDollars, inbnb: bBondPriceInBNB },
     },
   };
 
