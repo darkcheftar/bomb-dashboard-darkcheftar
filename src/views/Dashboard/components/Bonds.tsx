@@ -112,6 +112,7 @@ const Bonds: React.FC<any> = () => {
               onPresentR();
             }} disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}>Redeem</StyledButton>
             <span style={{display:(!bondStat || bondBalance.eq(0) || !isBondRedeemable)?'inline':'none', color:'#FFFFFF80',fontSize:'0.8rem'}}> Enabled when 10,000 BOMB &gt; ${BOND_REDEEM_PRICE}BTC</span>
+
           </div>
         </div>
       </div>
